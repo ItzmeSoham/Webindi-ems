@@ -21,7 +21,7 @@ export const getAll = async (req: AuthRequest, res: Response, next: NextFunction
 
 export const getById = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    const employee = await employeeService.getEmployeeById(req.params.id);
+    const employee = await employeeService.getEmployeeById(req.params.id as string);
     res.json({ success: true, data: employee });
   } catch (error) {
     next(error);
@@ -42,7 +42,7 @@ export const create = async (req: AuthRequest, res: Response, next: NextFunction
 
 export const update = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    const employee = await employeeService.updateEmployee(req.params.id, req.body);
+    const employee = await employeeService.updateEmployee(req.params.id as string, req.body);
     await logActivity(prisma, req.user!.id, `Updated employee: ${employee.name}`, JSON.stringify(req.body));
     getIO().emit(EVENTS.EMPLOYEE_UPDATED, employee);
     getIO().emit(EVENTS.DASHBOARD_REFRESH);
@@ -54,7 +54,7 @@ export const update = async (req: AuthRequest, res: Response, next: NextFunction
 
 export const remove = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    await employeeService.deleteEmployee(req.params.id);
+    await employeeService.deleteEmployee(req.params.id as string);
     await logActivity(prisma, req.user!.id, `Deleted employee ID: ${req.params.id}`);
     getIO().emit(EVENTS.EMPLOYEE_DELETED, { id: req.params.id });
     getIO().emit(EVENTS.DASHBOARD_REFRESH);
@@ -70,7 +70,7 @@ export const uploadAvatar = async (req: AuthRequest, res: Response, next: NextFu
       res.status(400).json({ success: false, message: 'No file uploaded' });
       return;
     }
-    const employee = await employeeService.uploadEmployeeAvatar(req.params.id, req.file.buffer);
+    const employee = await employeeService.uploadEmployeeAvatar(req.params.id as string, req.file.buffer);
     await logActivity(prisma, req.user!.id, `Updated avatar for: ${employee.name}`);
     getIO().emit(EVENTS.EMPLOYEE_UPDATED, employee);
     res.json({ success: true, data: employee });

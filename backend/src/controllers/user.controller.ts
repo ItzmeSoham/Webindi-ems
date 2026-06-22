@@ -25,7 +25,7 @@ export const create = async (req: AuthRequest, res: Response, next: NextFunction
 
 export const update = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    const user = await userService.updateUser(req.params.id, req.body);
+    const user = await userService.updateUser(req.params.id as string, req.body);
     await logActivity(prisma, req.user!.id, `Updated user: ${user.name}`);
     res.json({ success: true, data: user });
   } catch (error) {
@@ -35,7 +35,7 @@ export const update = async (req: AuthRequest, res: Response, next: NextFunction
 
 export const remove = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    await userService.deleteUser(req.params.id, req.user!.id);
+    await userService.deleteUser(req.params.id as string, req.user!.id);
     await logActivity(prisma, req.user!.id, `Deleted user ID: ${req.params.id}`);
     res.json({ success: true, message: 'User deleted successfully' });
   } catch (error) {

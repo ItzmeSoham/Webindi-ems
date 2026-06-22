@@ -32,7 +32,7 @@ export const create = async (req: AuthRequest, res: Response, next: NextFunction
 
 export const updateStatus = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
-    const leave = await leaveService.updateLeaveStatus(req.params.id, req.body.status);
+    const leave = await leaveService.updateLeaveStatus(req.params.id as string, req.body.status);
     await logActivity(
       prisma,
       req.user!.id,
