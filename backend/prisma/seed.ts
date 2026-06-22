@@ -25,17 +25,17 @@ async function main() {
 
   // Create sample HR users
   const hrUsers = [
-    { name: 'Sarah Johnson', email: 'sarah@ems.com' },
-    { name: 'Mike Chen', email: 'mike@ems.com' },
-    { name: 'Emily Davis', email: 'emily@ems.com' },
+    { name: 'Ananya', email: 'ananya@ems.com', password: 'Hr1@123456' },
+    { name: 'Tiyasha', email: 'tiyasha@ems.com', password: 'Hr2@123456' },
+    { name: 'Moubani', email: 'moubani@ems.com', password: 'Hr3@123456' },
   ];
 
   for (const hr of hrUsers) {
-    const hashed = await bcrypt.hash('Hr@123456', 12);
+    const hashed = await bcrypt.hash(hr.password, 12);
     await prisma.user.upsert({
       where: { email: hr.email },
       update: {},
-      create: { ...hr, password: hashed, role: 'HR' },
+      create: { name: hr.name, email: hr.email, password: hashed, role: 'HR' },
     });
     console.log(`✅ HR User: ${hr.email}`);
   }
@@ -116,9 +116,9 @@ async function main() {
   console.log('\n🎉 Database seeding complete!');
   console.log('\n📋 Login Credentials:');
   console.log('  SuperAdmin: admin@ems.com / Admin@123456');
-  console.log('  HR: sarah@ems.com / Hr@123456');
-  console.log('  HR: mike@ems.com / Hr@123456');
-  console.log('  HR: emily@ems.com / Hr@123456');
+  console.log('  HR: ananya@ems.com / Hr1@123456');
+  console.log('  HR: tiyasha@ems.com / Hr2@123456');
+  console.log('  HR: moubani@ems.com / Hr3@123456');
   console.log('  Director: director@ems.com / Director@123456');
 }
 
