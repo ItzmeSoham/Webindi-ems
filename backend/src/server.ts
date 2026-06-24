@@ -9,7 +9,7 @@ const server = http.createServer(app);
 setupSocket(server);
 
 // Start server
-server.listen(config.port, () => {
+server.listen(config.port, '0.0.0.0', () => {
   console.log(`🚀 EMS Backend running on port ${config.port}`);
   console.log(`📊 Environment: ${config.nodeEnv}`);
   console.log(`🔌 Socket.IO ready`);
