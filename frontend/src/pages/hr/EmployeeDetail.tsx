@@ -8,7 +8,7 @@ import Badge from '../../components/ui/Badge';
 import Loader from '../../components/ui/Loader';
 import employeeService from '../../services/employeeService';
 import { Employee } from '../../types';
-import { ArrowLeft, Edit2, Trash2, Mail, Phone, Building, Briefcase, DollarSign, Calendar } from 'lucide-react';
+import { ArrowLeft, Edit2, Trash2, Mail, Phone, Building, Briefcase, IndianRupee, Calendar } from 'lucide-react';
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
 
@@ -59,7 +59,7 @@ const EmployeeDetail: React.FC = () => {
     { icon: Phone, label: 'Phone', value: employee.phone || 'N/A' },
     { icon: Building, label: 'Department', value: employee.department },
     { icon: Briefcase, label: 'Designation', value: employee.designation },
-    { icon: DollarSign, label: 'Salary', value: `$${employee.salary?.toLocaleString()}` },
+    { icon: IndianRupee, label: 'Salary', value: `₹${employee.salary?.toLocaleString()}` },
     { icon: Calendar, label: 'Joined', value: format(new Date(employee.joinDate), 'MMM dd, yyyy') },
   ];
 

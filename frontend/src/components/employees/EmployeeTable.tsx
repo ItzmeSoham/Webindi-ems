@@ -62,7 +62,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, onEdit, onDele
               </td>
               <td className="px-6 py-4 text-sm text-slate-300">{emp.department}</td>
               <td className="px-6 py-4 text-sm text-slate-300">{emp.designation}</td>
-              <td className="px-6 py-4 text-sm font-medium text-slate-200">${emp.salary.toLocaleString()}</td>
+              <td className="px-6 py-4 text-sm font-medium text-slate-200">₹{emp.salary.toLocaleString()}</td>
               <td className="px-6 py-4">
                 <Badge variant={emp.status === 'ACTIVE' ? 'success' : 'danger'}>
                   {emp.status}
