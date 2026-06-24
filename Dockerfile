@@ -2,15 +2,15 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+# Copy package files from the backend directory
+COPY backend/package*.json ./
 
 # Install dependencies and OpenSSL for Prisma
 RUN apk add --no-cache openssl
 RUN npm install
 
-# Copy source code and prisma schema
-COPY . .
+# Copy the rest of the backend source code
+COPY backend/ .
 
 # Generate Prisma Client
 RUN npx prisma generate
