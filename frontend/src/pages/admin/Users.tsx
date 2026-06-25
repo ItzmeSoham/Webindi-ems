@@ -63,7 +63,7 @@ const Users: React.FC = () => {
 
   const openEdit = (u: User) => {
     setEditUser(u);
-    setForm({ name: u.name, email: u.email, password: '', role: u.role });
+    setForm({ name: u.name, email: u.email, password: '', role: u.role as 'HR' | 'DIRECTOR' });
     setShowModal(true);
   };
 
