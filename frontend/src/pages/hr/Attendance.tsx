@@ -33,7 +33,7 @@ const Attendance: React.FC = () => {
   const { attendance: records, loading, refetch } = useAttendance({ date, department });
   const { employees } = useEmployees({});
 
-  const handleMark = async (data: { employeeId: string; date: string; status: string }) => {
+  const handleMark = async (data: { employeeId: string; date: string; status: 'PRESENT' | 'ABSENT' | 'LATE' }) => {
     setFormLoading(true);
     try {
       await attendanceService.mark(data);

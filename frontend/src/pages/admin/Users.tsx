@@ -18,7 +18,7 @@ const Users: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [editUser, setEditUser] = useState<User | null>(null);
   const [formLoading, setFormLoading] = useState(false);
-  const [form, setForm] = useState({ name: '', email: '', password: '', role: 'HR' });
+  const [form, setForm] = useState({ name: '', email: '', password: '', role: 'HR' as 'HR' | 'DIRECTOR' });
 
   const fetchUsers = async () => {
     try { const data = await userService.getAll(); setUsers(data); }
@@ -118,7 +118,7 @@ const Users: React.FC = () => {
             <Input label="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
             <Input label="Email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required />
             {!editUser && <Input label="Password" type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} required />}
-            <Select label="Role" options={roleOptions} value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} />
+            <Select label="Role" options={roleOptions} value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value as 'HR' | 'DIRECTOR' })} />
             <div className="flex justify-end pt-2"><Button type="submit" loading={formLoading}>{editUser ? 'Update' : 'Create'} User</Button></div>
           </form>
         </Modal>
