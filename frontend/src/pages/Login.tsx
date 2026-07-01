@@ -24,7 +24,11 @@ const Login: React.FC = () => {
       };
       navigate(routes[user.role] || '/hr/dashboard');
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      if (err.message === 'Network Error' || (err.response && err.response.status >= 500)) {
+        setError('Server is waking up from sleep mode. Please wait 15 seconds and try again!');
+      } else {
+        setError(err.response?.data?.message || 'Invalid credentials or login failed.');
+      }
     } finally {
       setLoading(false);
     }
